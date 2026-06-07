@@ -1,0 +1,7 @@
+// 빌드 구성. 키 정의(RAPIDAPI_KEY)는 커밋되지 않는 Secrets.local.xcconfig 에만 둡니다.
+// Secrets.local.xcconfig 예시:  RAPIDAPI_KEY = your_rapidapi_key
+#include? "Secrets.local.xcconfig"
+
+// Info.plist 의 RapidAPIKey 에 $(RAPIDAPI_KEY)를 주입 → 런타임에서 AppConfig 가 읽습니다.
+// (생성 Info.plist 키들은 GENERATE_INFOPLIST_FILE=YES 로 이 파일에 병합됩니다.)
+INFOPLIST_FILE = Info.plist

@@ -1,0 +1,54 @@
+# macOS
+.DS_Store
+
+# Claude Code
+.claude/settings.local.json
+
+# Xcode
+build/
+DerivedData/
+*.xcuserstate
+*.xcuserdatad/
+xcuserdata/
+*.xcscmblueprint
+*.xccheckout
+
+# 글로벌 .gitignore의 *.xcodeproj 제외 규칙 무력화 (이 프로젝트는 xcodeproj를 직접 커밋함)
+!*.xcodeproj
+!*.xcodeproj/**
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/xcuserdata/
+
+# Xcode - User-specific
+*.moved-aside
+*.hmap
+*.ipa
+*.dSYM.zip
+*.dSYM
+
+# Swift Package Manager
+.build/
+.swiftpm/
+Packages/
+Package.pins
+Package.resolved
+*.xcodeproj/project.xcworkspace/xcshareddata/swiftpm/
+
+# CocoaPods
+Pods/
+
+# Carthage
+Carthage/Build/
+Carthage/Checkouts
+
+# fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots/**/*.png
+fastlane/test_output
+
+# Code injection
+iOSInjectionProject/
+
+# Secrets (API 키) — 로컬에만 두고 커밋하지 않습니다
+Secrets.local.xcconfig
