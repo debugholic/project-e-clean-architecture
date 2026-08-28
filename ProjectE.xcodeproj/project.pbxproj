@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXFileReference section */
-		0CBE7BA52FB939950065D655 /* ProjectE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectE.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0C4D7D3F303F440B005DEB35 /* ProjectE.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ProjectE.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0CBE7BC02FB939980065D655 /* Config.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; path = Config.xcconfig; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -35,16 +35,8 @@
 			children = (
 				0CBE7BA72FB939950065D655 /* ProjectE */,
 				0CBE7BC02FB939980065D655 /* Config.xcconfig */,
-				0CBE7BA62FB939950065D655 /* Products */,
+				0C4D7D3F303F440B005DEB35 /* ProjectE.app */,
 			);
-			sourceTree = "<group>";
-		};
-		0CBE7BA62FB939950065D655 /* Products */ = {
-			isa = PBXGroup;
-			children = (
-				0CBE7BA52FB939950065D655 /* ProjectE.app */,
-			);
-			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -69,7 +61,7 @@
 			packageProductDependencies = (
 			);
 			productName = ProjectE;
-			productReference = 0CBE7BA52FB939950065D655 /* ProjectE.app */;
+			productReference = 0C4D7D3F303F440B005DEB35 /* ProjectE.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -97,7 +89,7 @@
 			mainGroup = 0CBE7B9C2FB939950065D655;
 			minimizedProjectReferenceProxies = 1;
 			preferredProjectObjectVersion = 77;
-			productRefGroup = 0CBE7BA62FB939950065D655 /* Products */;
+			productRefGroup = 0CBE7B9C2FB939950065D655;
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (

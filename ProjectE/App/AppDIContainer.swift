@@ -1,31 +1,98 @@
 import UIKit
 
-/// 컴포지션 루트 — Repository → UseCase → ViewModel/ViewController를 조립한다.
-/// 인메모리 저장소를 단일 인스턴스로 공유한다.
 final class AppDIContainer {
-
-  private let tripRepository: TripRepository = InMemoryTripRepository()
-  private let reservationRepository: ReservationRepository = AeroDataBoxReservationRepository()
-
-  func makeTripListViewController() -> UIViewController {
-    let viewModel = TripListViewModel(
-      observeTrips: ObserveTripsUseCase(trips: tripRepository),
-      deleteTrip: DeleteTripUseCase(trips: tripRepository)
+  private lazy var tripStorage: TripStorage = {
+    InMemoryTripStorageImpl()
+  }()
+  
+  private lazy var tripRepository: TripRepository = {
+    TripRepositoryImpl(
+      storage: tripStorage
     )
-    let viewController = TripListViewController(viewModel: viewModel)
-    viewController.makeAddReservation = { [weak self] in
-      self?.makeAddReservationViewController() ?? UIViewController()
-    }
-    viewController.makeCalendar = { trip in
-      TripCalendarViewController(viewModel: TripCalendarViewModel(trip: trip))
-    }
-    return viewController
+  }()
+  
+  private let aeroDataBoxHost = "aerodatabox.p.rapidapi.com"
+  private let apiKey = AppConfig.rapidAPIKey
+  
+  private lazy var aeroDataBoxAPIConfig: NetworkConfigurable = {
+    APIConfig(
+      baseURL: URL(
+        string: "https://\(aeroDataBoxHost)"
+      ),
+      headers: [
+        "X-RapidAPI-Host": aeroDataBoxHost,
+        "X-RapidAPI-Key": apiKey,
+      ]
+    )
+  }()
+  
+  private lazy var aeroDataBoxNetworkService: NetworkService = {
+    NetworkServiceImpl(
+      config: aeroDataBoxAPIConfig
+    )
+  }()
+  
+  private lazy var reservationRepository: ReservationRepository = {
+    AeroDataBoxReservationRepositoryImpl(
+      networkService: aeroDataBoxNetworkService
+    )
+  }()
+  
+  // MARK: - UseCase
+  
+  private func makeCreateTripUseCase() -> any CreateTripUseCase {
+    CreateTripUseCaseImpl(
+      reservationRepository: reservationRepository,
+      tripRepository: tripRepository
+    )
   }
-
-  private func makeAddReservationViewController() -> UIViewController {
-    let viewModel = AddReservationViewModel(
-      createTrip: CreateTripUseCase(reservation: reservationRepository, trips: tripRepository)
+  
+  private func makeDeleteTripUseCase() -> any DeleteTripUseCase {
+    DeleteTripUseCaseImpl(
+      tripRepository: tripRepository
     )
-    return AddReservationViewController(viewModel: viewModel)
+  }
+  
+  private func makeObserveTripsUseCase() -> any ObserveTripsUseCase {
+    ObserveTripsUseCaseImpl(
+      tripRepository: tripRepository
+    )
+  }
+}
+
+// MARK: - AppFlowCoordinatorDependencies
+
+extension AppDIContainer: AppFlowCoordinatorDependencies {
+  func makeTripListViewController(
+    actions: TripListViewModelActions
+  ) -> UIViewController {
+    TripListViewController(
+      viewModel: TripListViewModel(
+        actions: actions,
+        deleteTripUseCase: makeDeleteTripUseCase(),
+        observeTripsUseCase: makeObserveTripsUseCase()
+      )
+    )
+  }
+  
+  func makeAddReservationViewController(
+    actions: AddReservationViewModelActions
+  ) -> UIViewController {
+    AddReservationViewController(
+      viewModel: AddReservationViewModel(
+        actions: actions,
+        createTripUseCase: makeCreateTripUseCase()
+      )
+    )
+  }
+  
+  func makeTripCalendarViewController(
+    trip: Trip
+  ) -> UIViewController {
+    TripCalendarViewController(
+      viewModel: TripCalendarViewModel(
+        trip: trip
+      )
+    )
   }
 }

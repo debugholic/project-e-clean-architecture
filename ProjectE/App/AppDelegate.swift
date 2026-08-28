@@ -14,7 +14,10 @@ final class AppDelegate: UIResponder, UIApplicationDelegate {
     configurationForConnecting connectingSceneSession: UISceneSession,
     options: UIScene.ConnectionOptions
   ) -> UISceneConfiguration {
-    let config = UISceneConfiguration(name: "Default", sessionRole: connectingSceneSession.role)
+    let config = UISceneConfiguration(
+      name: "Default",
+      sessionRole: connectingSceneSession.role
+    )
     config.delegateClass = SceneDelegate.self
     return config
   }
