@@ -1,4 +1,5 @@
 import Combine
+import Foundation
 
 final class InMemoryTripStorageImpl: TripStorage {
   @Published private var trips: [Trip] = []
