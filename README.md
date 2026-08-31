@@ -132,15 +132,16 @@ open ProjectE.xcodeproj
 | **E** | **Clean Architecture** |
 | F | XCTest |
 | G | SwiftUI |
-| H | Supabase |
-| I | FCM |
-| J | CoreData |
-| K | Tuist |
-| L | SPM 모듈화 |
-| M | SwiftData |
-| N | Objective-C + libexif |
-| O | Swift Testing |
-| P | UI Test |
-| Q | CI/CD (GitHub Actions) |
+| H | SPM 모듈화 |
+| I | Tuist |
+| J | Micro Feature Architecture |
+| K | Core Data |
+| L | CloudKit |
+| M | APNs |
+| N | SwiftData |
+| O | Objective-C + libexif |
+| P | Swift Testing |
+| Q | UI Test |
+| R | CI/CD (GitHub Actions) |
 
 각 단계는 별도 레포로 관리합니다.
